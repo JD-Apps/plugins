@@ -60,7 +60,7 @@
 
 - (NSMutableDictionary *)retrieveDynamicLink {
   if (_dynamicLink != nil) {
-    printf("FirebaseDynamicLinksPlugin: _dynamicLink not nil");
+    printf("FirebaseDynamicLinksPlugin: _dynamicLink not nil\r\n");
     NSMutableDictionary *dynamicLink = [[NSMutableDictionary alloc] init];
     dynamicLink[@"link"] = _dynamicLink.url.absoluteString;
 
@@ -72,14 +72,16 @@
     dynamicLink[@"ios"] = iosData;
     return dynamicLink;
   } else {
-    printf("FirebaseDynamicLinksPlugin: _dynamicLink is nil");
+    printf("FirebaseDynamicLinksPlugin: _dynamicLink is nil\r\n");
     return nil;
   }
 }
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
-            options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options 
+{
+    printf("FirebaseDynamicLinksPlugin: application is "+ url);
   return [self checkForDynamicLink:url];
 }
 
@@ -91,6 +93,8 @@
 }
 
 - (BOOL)checkForDynamicLink:(NSURL *)url {
+
+  printf("FirebaseDynamicLinksPlugin: checking For Dynamic Link...\r\n");
   FIRDynamicLink *dynamicLink = [[FIRDynamicLinks dynamicLinks] dynamicLinkFromCustomSchemeURL:url];
   if (dynamicLink) {
     if (dynamicLink.url) _dynamicLink = dynamicLink;
