@@ -26,6 +26,7 @@ class FirebaseDynamicLinks {
     final Map<dynamic, dynamic> linkData =
         await channel.invokeMethod('FirebaseDynamicLinks#retrieveDynamicLink');
 
+    print("firebase_dynamic_links.dart => linkData: $linkData");
     if (linkData == null) return null;
 
     PendingDynamicLinkDataAndroid androidData;

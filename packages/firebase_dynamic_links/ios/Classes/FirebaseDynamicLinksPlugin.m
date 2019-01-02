@@ -60,6 +60,7 @@
 
 - (NSMutableDictionary *)retrieveDynamicLink {
   if (_dynamicLink != nil) {
+    printf("FirebaseDynamicLinksPlugin: _dynamicLink not nil");
     NSMutableDictionary *dynamicLink = [[NSMutableDictionary alloc] init];
     dynamicLink[@"link"] = _dynamicLink.url.absoluteString;
 
@@ -71,6 +72,7 @@
     dynamicLink[@"ios"] = iosData;
     return dynamicLink;
   } else {
+    printf("FirebaseDynamicLinksPlugin: _dynamicLink is nil");
     return nil;
   }
 }
